@@ -75,6 +75,9 @@ const Hero = () => (
     <p className="mt-4 text-lg md:text-xl max-w-2xl">
       Full-Stack Engineer | Tech Enthusiast | Chess Master
     </p>
+    <p className="mt-2 text-sm text-gray-400 max-w-2xl">
+    Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.
+      </p>
   </section>
 );
 
@@ -299,27 +302,29 @@ const Certifications = () => (
 
 
 
+
+
 const Contact = () => (
-  <section className="py-20 px-6 md:px-20">
+  <section className="py-20 px-6 md:px-20 relative z-10"> {/* Add relative and z-10 here */}
     <h2 className="text-3xl font-semibold mb-10 text-center text-white">Let's build</h2>
 
     <div className="flex justify-center gap-6">
       {/* Phone */}
       <a
         href="tel:+254799178783"
-        className="text-gray-600 hover:text-blue-600 transition"
+        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="Call Robert"
       >
-        <Phone size={28} />
+        <Phone size={28} className="text-white" />
       </a>
 
       {/* Email */}
       <a
         href="mailto:robertomungai001@gmail.com"
-        className="text-gray-600 hover:text-blue-600 transition"
+        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="Email Robert"
       >
-        <Mail size={28} />
+        <Mail size={28} className="text-white" />
       </a>
 
       {/* GitHub */}
@@ -327,10 +332,10 @@ const Contact = () => (
         href="https://github.com/thufu7"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-600 hover:text-blue-600 transition"
+        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="GitHub"
       >
-        <Github size={28} />
+        <Github size={28} className="text-white" />
       </a>
 
       {/* LinkedIn */}
@@ -338,10 +343,10 @@ const Contact = () => (
         href="https://linkedin.com/in/robert-mungai-529306219/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-600 hover:text-blue-600 transition"
+        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="LinkedIn"
       >
-        <Linkedin size={28} />
+        <Linkedin size={28} className="text-white" />
       </a>
     </div>
 
@@ -350,3 +355,5 @@ const Contact = () => (
     </p>
   </section>
 );
+
+
