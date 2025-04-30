@@ -1,68 +1,76 @@
-import React from 'react';
+// Enhanced App.js with toggle, Now Playing, alternate avatar, and animated hobbies
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import avatar from './assets/avatar.jpg';
+import avatarFun from './assets/avatar-fun.jpg';
 import { Phone, Mail, Github, Linkedin } from 'lucide-react';
 
-const BackgroundWrapper = ({ children }) => (
-  <div className="relative bg-[#0f172a] text-white rounded-xl overflow-hidden shadow-md">
-    <div className="absolute inset-0 opacity-10 z-0">
-      <svg className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="1" />
-            <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <circle cx="25%" cy="40%" r="300" fill="url(#grad)" />
-        <circle cx="75%" cy="70%" r="250" fill="url(#grad)" />
-      </svg>
-    </div>
-    <div className="relative z-10 p-6">{children}</div>
-  </div>
-);
+const App = () => {
+  const [view, setView] = useState('official'); // Default view is 'official'
 
-export default function App() {
+  const toggleView = () => setView(view === 'personal' ? 'official' : 'personal');
+
   return (
     <div className="relative min-h-screen bg-[#0f172a] text-white overflow-hidden">
-    {/* Glowing radial background */}
-    <div className="absolute inset-0 z-0 opacity-10">
-      <svg className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="1" />
-            <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <circle cx="25%" cy="40%" r="300" fill="url(#bg-grad)" />
-        <circle cx="75%" cy="70%" r="250" fill="url(#bg-grad)" />
-      </svg>
-    </div>
-    <main className="font-sans text-gray-800">
-      <div className="max-w-7xl mx-auto px-10">
-        <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Education />
-        <Certifications />
-        <Contact />
+      <div className="absolute inset-0 z-0 opacity-10">
+        <svg className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop offset="0%" stopColor="#38bdf8" stopOpacity="1" />
+              <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <circle cx="25%" cy="40%" r="300" fill="url(#bg-grad)" />
+          <circle cx="75%" cy="70%" r="250" fill="url(#bg-grad)" />
+        </svg>
       </div>
-    </main>
+      <main className="font-sans text-white relative z-10">
+        <div className="max-w-7xl mx-auto px-10">
+          <div className="flex justify-end py-4">
+            <button
+              onClick={toggleView}
+              className="bg-blue-600 hover:bg-blue-700 transition px-4 py-2 rounded-full text-sm"
+            >
+              Switch to {view === 'personal' ? 'Official' : 'Personal'} View
+            </button>
+
+          </div>
+
+          <Hero view={view} />
+          <About />
+          {view === 'personal' && (
+            <>
+              <LifeOutsideCode />
+              <NowPlaying />
+            </>
+          )}
+          {view === 'official' && (
+            <>
+              <Projects />
+              <Experience />
+              <Education />
+              <Certifications />
+            </>
+          )}
+          <Contact />
+        </div>
+      </main>
     </div>
   );
-}
+};
 
-const Hero = () => (
+
+
+const Hero = ({ view }) => (
   <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-[#0f172a] text-white">
-    {/* <motion.img
-      src={avatar}
+    <motion.img
+      src={view === 'official' ? avatar : avatarFun}
       alt="Robert Mungai"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
-      className="w-40 h-40 md:w-56 md:h-56 object-cover shadow-md mb-6"
-    /> */}
-
+      className="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full shadow-md mb-6"
+    />
     <motion.h1
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -71,28 +79,64 @@ const Hero = () => (
     >
       SALUT! I am Robert Mungai
     </motion.h1>
-
     <p className="mt-4 text-lg md:text-xl max-w-2xl">
-      Full-Stack Engineer | Tech Enthusiast | Chess Master
+      {view === 'official'
+        ? 'Full-Stack Engineer | Tech Enthusiast | Chess Master'
+        : 'Lover of code, chess, and clutching Chicken Dinners 🏆'}
     </p>
     <p className="mt-2 text-sm text-gray-400 max-w-2xl">
-    Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.
-      </p>
+      {view === 'official'
+        ? 'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
+        : 'When I’m not coding, I’m deep in a chess puzzle, a swimming lane, or a PUBG squad.'}
+    </p>
   </section>
 );
+
+const LifeOutsideCode = () => {
+  const hobbies = [
+    { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles — name it.' },
+    { emoji: '🏊', title: 'Swimmer', desc: 'Whether it’s for fitness or focus, I thrive in the water. Breaststroke is my thing.' },
+    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Erangel. I love leading squads and clutching in the final circle.' }
+  ];
+
+  return (
+    <section className="py-20 px-6 md:px-20">
+      <div className="text-center text-white mb-10">
+        <h2 className="text-4xl font-bold">Beyond the Code</h2>
+      </div>
+      <div className="grid md:grid-cols-3 gap-6 text-white text-lg">
+        {hobbies.map((hobby, index) => (
+          <motion.div
+            key={index}
+            className="bg-white/5 p-6 rounded-xl shadow hover:shadow-md transition text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2 }}
+          >
+            <div className="text-3xl mb-2">{hobby.emoji}</div>
+            <strong>{hobby.title}</strong>
+            <p className="text-sm mt-2 text-gray-300">{hobby.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const About = () => (
   <section className="py-20 px-6 md:px-20">
-    <BackgroundWrapper>
-      <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
-      <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
-        Results-driven Systems Developer based in Nairobi, Kenya with strong experience in full-stack development, system integration, and API development.
-        Skilled in PHP, React, Python, Yii2, Laravel, Redis, Django, and database technologies like MySQL, PostgreSQL, and SSMS.
-        Passionate about delivering scalable, user-focused web applications across financial, regulatory, and energy sectors.
-      </p>
-    </BackgroundWrapper>
+    <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
+    <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
+      Results-driven Systems Developer based in Nairobi, Kenya with strong experience in full-stack development, system integration, and API development.
+      Skilled in PHP, React, Python, Yii2, Laravel, Redis, Django, and database technologies like MySQL, PostgreSQL, and SSMS.
+      Passionate about delivering scalable, user-focused web applications across financial, regulatory, and energy sectors.
+    </p>
   </section>
 );
+
+
+
 
 const Projects = () => {
   const npraLogo = require('./assets/npra-logo.png');
@@ -240,7 +284,7 @@ const Experience = () => {
         {experiences.map((exp, index) => (
           <div key={index} className="relative shadow rounded-xl p-6 border">
             {/* Timeline Circle */}
-            
+
 
             <h3 className="text-xl font-bold text-purple-700">{exp.role}</h3>
             <p className="text-sm text-white">{exp.date} • {exp.company}, {exp.location}</p>
@@ -252,16 +296,16 @@ const Experience = () => {
             </div>
           </div>
         ))}
-            {/* Resume Download Button */}
-    <a
-      href="/resume.pdf"
-      download
-      className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
-    >
-      📄 Download Resume
-    </a>
+        {/* Resume Download Button */}
+        <a
+          href="/resume.pdf"
+          download
+          className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
+        >
+          📄 Download Resume
+        </a>
       </div>
-      
+
     </section>
   );
 };
@@ -283,13 +327,13 @@ const Education = () => (
 const Certifications = () => (
   <section className="py-20 px-6 md:px-20 text-white text-center">
     <h2 className="text-3xl font-bold mb-10 text-white">Certifications</h2>
-    
+
     <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-2 text-left text-white">
       <div className="border-l-4 border-green-500 shadow-sm px-4 py-3 rounded bg-white/5 backdrop-blur-sm">
         <span className="font-medium block">Microsoft 365 Certified: Fundamentals</span>
         <p className="text-sm mt-1">Issued Mar 2025</p>
       </div>
-      
+
       <div className="border-l-4 border-yellow-500 shadow-sm px-4 py-3 rounded bg-white/5 backdrop-blur-sm">
         <span className="font-medium block">PHP Yii2 Course — Udemy</span>
         <p className="text-sm mt-1">Completed Dec 2023</p>
@@ -356,4 +400,14 @@ const Contact = () => (
   </section>
 );
 
+const NowPlaying = () => (
+  <section className="py-16 px-6 md:px-20">
+    <div className="bg-white/10 rounded-xl p-6 text-center">
+      <h3 className="text-xl font-semibold text-white mb-2">🎵 Now Playing</h3>
+      <p className="text-sm text-gray-300">Currently vibing to: <strong>"Interstellar Soundtrack - Hans Zimmer"</strong></p>
+      <p className="text-xs text-gray-500">(manually updated)</p>
+    </div>
+  </section>
+);
 
+export default App;
