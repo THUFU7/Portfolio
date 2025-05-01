@@ -1,8 +1,8 @@
 // Enhanced App.js with toggle, Now Playing, alternate avatar, and animated hobbies
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import avatar from './assets/avatar.jpg';
-import avatarFun from './assets/avatar-fun.jpg';
+import avatar from './assets/avatar-fun.jpg';
+import avatarFun from './assets/avatar.jpg';
 import { Phone, Mail, Github, Linkedin } from 'lucide-react';
 
 const App = () => {
@@ -82,7 +82,7 @@ const Hero = ({ view }) => (
     <p className="mt-4 text-lg md:text-xl max-w-2xl">
       {view === 'official'
         ? 'Full-Stack Engineer | Tech Enthusiast | Chess Master'
-        : 'Lover of code, chess, and clutching Chicken Dinners 🏆'}
+        : 'Good things comes in threes: Lover of swimming, chess, and clutching Chicken Dinners 🏆 - well atleast quarter the time.'}
     </p>
     <p className="mt-2 text-sm text-gray-400 max-w-2xl">
       {view === 'official'
@@ -94,9 +94,10 @@ const Hero = ({ view }) => (
 
 const LifeOutsideCode = () => {
   const hobbies = [
-    { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles — name it.' },
-    { emoji: '🏊', title: 'Swimmer', desc: 'Whether it’s for fitness or focus, I thrive in the water. Breaststroke is my thing.' },
-    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Erangel. I love leading squads and clutching in the final circle.' }
+    { emoji: '♟️', title: 'Gym', desc: 'Physical fitness brings along mental fitness and toughness. I employ you to try it if you are not already. Slay your demons with a heavy deadlift.' },
+    { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles, and the all important sacrifices — name it.' },
+    { emoji: '🏊', title: 'Swimmer', desc: 'Gets the mind of the code that is working locally but not on production, good to get you shredded and the sun in your eyes for all you tech bros. Freestyle is my thing.' },
+    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, a little bit of camping, a dash of toxicity and a rush to kill bots all for the chicken dinner and a high K/D.' }
   ];
 
   return (
