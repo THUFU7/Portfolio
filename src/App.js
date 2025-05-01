@@ -1,5 +1,5 @@
 // Enhanced App.js with toggle, Now Playing, alternate avatar, and animated hobbies
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import avatar from './assets/avatar-fun.jpg';
 import avatarFun from './assets/avatar.jpg';
