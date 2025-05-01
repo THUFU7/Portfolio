@@ -29,7 +29,7 @@ const App = () => {
           <div className="flex justify-end py-4">
             <button
               onClick={toggleView}
-              className="bg-blue-600 hover:bg-blue-700 transition px-4 py-2 rounded-full text-sm"
+              className="bg-blue-600 hover:bg-blue-700 transition px-4 py-2 text-sm"
             >
               Switch to {view === 'personal' ? 'Official' : 'Personal'} View
             </button>
@@ -94,10 +94,10 @@ const Hero = ({ view }) => (
 
 const LifeOutsideCode = () => {
   const hobbies = [
-    { emoji: '♟️', title: 'Gym', desc: 'Physical fitness brings along mental fitness and toughness. I employ you to try it if you are not already. Slay your demons with a heavy deadlift.' },
+    { emoji: '🏋️‍♂️', title: 'Gym', desc: 'Physical fitness brings along mental fitness and toughness. I employ you to try it if you are not already. Slay your demons with a heavy deadlift.' },
     { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles, and the all important sacrifices — name it.' },
-    { emoji: '🏊', title: 'Swimmer', desc: 'Gets the mind of the code that is working locally but not on production, good to get you shredded and the sun in your eyes for all you tech bros. Freestyle is my thing.' },
-    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, a little bit of camping, a dash of toxicity and a rush to kill bots all for the chicken dinner and a high K/D.' }
+    { emoji: '🏊', title: 'Swimmer', desc: 'Gets the mind off the code that is working locally but not on production. Freestyle is my thing.' },
+    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, camping, and clutching for that Chicken Dinner.' }
   ];
 
   return (
@@ -105,7 +105,7 @@ const LifeOutsideCode = () => {
       <div className="text-center text-white mb-10">
         <h2 className="text-4xl font-bold">Beyond the Code</h2>
       </div>
-      <div className="grid md:grid-cols-3 gap-6 text-white text-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-white text-lg">
         {hobbies.map((hobby, index) => (
           <motion.div
             key={index}
@@ -124,6 +124,7 @@ const LifeOutsideCode = () => {
     </section>
   );
 };
+
 
 const About = () => (
   <section className="py-20 px-6 md:px-20">
