@@ -41,7 +41,6 @@ const App = () => {
           {view === 'personal' && (
             <>
               <LifeOutsideCode />
-              <NowPlaying />
             </>
           )}
           {view === 'official' && (
@@ -402,52 +401,6 @@ const Contact = () => (
   </section>
 );
 
-const NowPlaying = () => {
-  const [track, setTrack] = useState(null);
 
-  useEffect(() => {
-    const fetchNowPlaying = async () => {
-      try {
-        const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_SPOTIFY_TOKEN}`,
-          },
-        });
-
-        if (res.status === 204) return; // Nothing playing
-
-        const data = await res.json();
-        setTrack({
-          name: data.item.name,
-          artist: data.item.artists.map(a => a.name).join(', '),
-          image: data.item.album.images[0].url,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchNowPlaying();
-    const interval = setInterval(fetchNowPlaying, 60000); // refresh every minute
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section className="py-16 px-6 md:px-20">
-      <div className="bg-white/10 rounded-xl p-6 text-center">
-        <h3 className="text-xl font-semibold text-white mb-2">🎵 Now Playing</h3>
-        {track ? (
-          <>
-            <img src={track.image} alt={track.name} className="w-24 mx-auto mb-3 rounded" />
-            <p className="text-sm text-gray-300 font-semibold">{track.name}</p>
-            <p className="text-xs text-gray-400">{track.artist}</p>
-          </>
-        ) : (
-          <p className="text-sm text-gray-300">Nothing playing right now.</p>
-        )}
-      </div>
-    </section>
-  );
-};
 
 export default App;
