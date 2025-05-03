@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import avatar from './assets/avatar-fun.jpg';
 import avatarFun from './assets/avatar.jpg';
+
 import { Phone, Mail, Github, Linkedin } from 'lucide-react';
 
 const App = () => {
@@ -37,7 +38,6 @@ const App = () => {
           </div>
 
           <Hero view={view} />
-          <About />
           {view === 'personal' && (
             <>
               <LifeOutsideCode />
@@ -45,6 +45,7 @@ const App = () => {
           )}
           {view === 'official' && (
             <>
+              <About />
               <Projects />
               <Experience />
               <Education />
@@ -61,15 +62,21 @@ const App = () => {
 
 
 const Hero = ({ view }) => (
-  <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-[#0f172a] text-white">
-    <motion.img
-      src={view === 'official' ? avatar : avatarFun}
-      alt="Robert Mungai"
-      initial={{ opacity: 0, scale: 0.8 }}
+  <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-[#0f172a] text-white relative">
+    {/* Giant circular border for creative look */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full shadow-md mb-6"
-    />
+      transition={{ duration: 1 }}
+      className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-4 border-blue-500 shadow-xl overflow-hidden mb-8"
+    >
+      <img
+        src={view === 'official' ? avatar : avatarFun}
+        alt="Robert Mungai"
+        className="w-full h-full object-cover"
+      />
+    </motion.div>
+
     <motion.h1
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -78,11 +85,13 @@ const Hero = ({ view }) => (
     >
       SALUT! I am Robert Mungai
     </motion.h1>
+
     <p className="mt-4 text-lg md:text-xl max-w-2xl">
       {view === 'official'
-        ? 'Full-Stack Engineer | Tech Enthusiast | Chess Master'
-        : 'Good things comes in threes: Lover of swimming, chess, and clutching Chicken Dinners 🏆 - well atleast quarter the time.'}
+        ? 'Systems Developer | Full-Stack Engineer | Tech Enthusiast'
+        : 'Good things comes in threes: Lover of swimming, chess, and clutching Chicken Dinners 🏆 - well at least quarter the time.'}
     </p>
+
     <p className="mt-2 text-sm text-gray-400 max-w-2xl">
       {view === 'official'
         ? 'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
@@ -90,6 +99,7 @@ const Hero = ({ view }) => (
     </p>
   </section>
 );
+
 
 const LifeOutsideCode = () => {
   const hobbies = [
@@ -325,23 +335,74 @@ const Education = () => (
 
 
 
-const Certifications = () => (
-  <section className="py-20 px-6 md:px-20 text-white text-center">
-    <h2 className="text-3xl font-bold mb-10 text-white">Certifications</h2>
+const Certifications = () => {
+  const microsoftLogo = require('./assets/ms.png');
+  const udemyLogo = require('./assets/udemy.png');
 
-    <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-2 text-left text-white">
-      <div className="border-l-4 border-green-500 shadow-sm px-4 py-3 rounded bg-white/5 backdrop-blur-sm">
-        <span className="font-medium block">Microsoft 365 Certified: Fundamentals</span>
-        <p className="text-sm mt-1">Issued Mar 2025</p>
-      </div>
+  const certs = [
+    {
+      name: 'Microsoft 365 Certified: Fundamentals',
+      date: 'Issued Mar 2025',
+      border: 'border-green-500',
+      file: '/ms-certificate.pdf',
+      logo: microsoftLogo,
+    },
+    {
+      name: 'PHP Yii2 Course — Udemy',
+      date: 'Completed Dec 2023',
+      border: 'border-yellow-500',
+      file: '/udemy-cert.pdf',
+      logo: udemyLogo,
+    }
+  ];
 
-      <div className="border-l-4 border-yellow-500 shadow-sm px-4 py-3 rounded bg-white/5 backdrop-blur-sm">
-        <span className="font-medium block">PHP Yii2 Course — Udemy</span>
-        <p className="text-sm mt-1">Completed Dec 2023</p>
+  return (
+    <section className="py-20 px-6 md:px-20 text-white">
+      <h2 className="text-3xl font-semibold mb-10 text-center">Certifications</h2>
+
+      <div className="grid gap-8 md:grid-cols-2">
+        {certs.map((cert, index) => (
+          <motion.a
+            key={index}
+            href={cert.file}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex rounded-xl shadow-md border overflow-hidden group hover:shadow-lg transition-all duration-300 ${cert.border}`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2 }}
+          >
+            {/* Left: Logo */}
+            <div className="flex items-center justify-center p-6 w-1/3 bg-white/10">
+              <img src={cert.logo} alt="Cert Logo" className="h-20 object-contain" />
+            </div>
+
+            {/* Center: Text with background hover effect */}
+            <div className="relative flex-1 p-6 space-y-3 overflow-hidden">
+              <img
+                src={cert.bg}
+                alt="Background"
+                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 blur-sm transition duration-300"
+              />
+
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold">{cert.name}</h3>
+                <p className="text-sm text-gray-300">{cert.date}</p>
+                <p className="text-xs text-white-400 mt-2 opacity-0 group-hover:opacity-100 transition">
+                  ⬇ Click to download certificate
+                </p>
+              </div>
+            </div>
+          </motion.a>
+        ))}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
+
+
 
 
 
