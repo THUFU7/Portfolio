@@ -358,7 +358,7 @@ const Experience = () => {
         ))}
         {/* Resume Download Button */}
         <a
-          href="/resume.pdf"
+          href="/Robert_Mungai_Resume.pdf"
           download
           className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
         >
