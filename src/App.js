@@ -76,16 +76,25 @@ const Hero = ({ view }) => (
         className="w-full h-full object-cover"
       />
     </motion.div>
-
-    <motion.h1
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="text-4xl md:text-6xl font-bold"
-    >
-      SALUT! I am Robert Mungai
-    </motion.h1>
-
+    {view === 'official' ? (
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-4xl md:text-6xl font-bold"
+      >
+        SALUT! I am Robert Mungai.
+      </motion.h1>
+    ) : (
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-4xl md:text-4xl font-bold"
+      >
+        SALUT! I am...well you already know who I am <span className="inline-block">😄</span>
+      </motion.h1>
+    )}
     <p className="mt-4 text-lg md:text-xl max-w-2xl">
       {view === 'official'
         ? 'Systems Developer | Full-Stack Engineer | Tech Enthusiast'
@@ -97,7 +106,7 @@ const Hero = ({ view }) => (
         ? 'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
         : 'When I’m not coding, I’m deep in a chess puzzle, a swimming lane, or a PUBG squad.'}
     </p>
-  </section>
+  </section >
 );
 
 
@@ -153,12 +162,12 @@ const About = () => {
     <section className="py-20 px-6 md:px-20">
       <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
       <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
-  I'm a Systems Developer from Nairobi, Kenya who thrives at the intersection of code, creativity, and real-world impact. From building regulatory engines for pension authorities to shipping full-stack apps that scale, I’ve honed my skills across PHP, React, Python, Yii2, Laravel, and more.  
-  <br /><br />
-  Whether it’s optimizing backend systems with Redis or crafting sleek UIs in React, I take pride in building solutions that matter — especially in high-stakes industries like finance, energy, and compliance. Let's engineer the future, one system at a time.
-  <br /><br />
-  <b>BRING ON THE PRESSURE!</b>
-</p>
+        I'm a Systems Developer from Nairobi, Kenya who thrives at the intersection of code, creativity, and real-world impact. From building regulatory engines for pension authorities to shipping full-stack apps that scale, I’ve honed my skills across PHP, React, Python, Yii2, Laravel, and more.
+        <br /><br />
+        Whether it’s optimizing backend systems with Redis or crafting sleek UIs in React, I take pride in building solutions that matter — especially in high-stakes industries like finance, energy, and compliance. Let's engineer the future, one system at a time.
+        <br /><br />
+        <b>BRING ON THE PRESSURE!</b>
+      </p>
       <h2 className="text-3xl font-semibold mt-10 mb-6 text-center text-white">Tech Stack</h2>
 
       <div className="mt-10 flex flex-wrap justify-center items-center gap-6">
