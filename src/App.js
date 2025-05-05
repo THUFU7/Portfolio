@@ -135,16 +135,56 @@ const LifeOutsideCode = () => {
 };
 
 
-const About = () => (
-  <section className="py-20 px-6 md:px-20">
-    <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
-    <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
-      Results-driven Systems Developer based in Nairobi, Kenya with strong experience in full-stack development, system integration, and API development.
-      Skilled in PHP, React, Python, Yii2, Laravel, Redis, Django, and database technologies like MySQL, PostgreSQL, and SSMS.
-      Passionate about delivering scalable, user-focused web applications across financial, regulatory, and energy sectors.
-    </p>
-  </section>
-);
+const About = () => {
+  const techLogos = [
+    { name: 'PHP', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg' },
+    { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
+    { name: 'Python', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
+    { name: 'Yii2', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yii/yii-original.svg' },
+    { name: 'Laravel', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg' },
+    { name: 'Redis', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg' },
+    { name: 'Django', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg' },
+    { name: 'MySQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg' },
+    { name: 'PostgreSQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
+    { name: 'SQL Server', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg' },
+  ];
+
+  return (
+    <section className="py-20 px-6 md:px-20">
+      <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
+      <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
+  I'm a Systems Developer from Nairobi, Kenya who thrives at the intersection of code, creativity, and real-world impact. From building regulatory engines for pension authorities to shipping full-stack apps that scale, I’ve honed my skills across PHP, React, Python, Yii2, Laravel, and more.  
+  <br /><br />
+  Whether it’s optimizing backend systems with Redis or crafting sleek UIs in React, I take pride in building solutions that matter — especially in high-stakes industries like finance, energy, and compliance. Let's engineer the future, one system at a time.
+  <br /><br />
+  <b>BRING ON THE PRESSURE!</b>
+</p>
+      <h2 className="text-3xl font-semibold mt-10 mb-6 text-center text-white">Tech Stack</h2>
+
+      <div className="mt-10 flex flex-wrap justify-center items-center gap-6">
+        {techLogos.map((tech, index) => (
+          <motion.div
+            key={tech.name}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            title={tech.name}
+            className="w-14 h-14 md:w-16 md:h-16"
+          >
+            <img
+              src={tech.src}
+              alt={tech.name}
+              className="object-contain w-full h-full transition"
+            />
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+
 
 
 
