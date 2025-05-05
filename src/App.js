@@ -28,14 +28,22 @@ const App = () => {
       <main className="font-sans text-white relative z-10">
         <div className="max-w-7xl mx-auto px-10">
           <div className="flex justify-end py-4">
-            <button
-              onClick={toggleView}
-              className="bg-blue-600 hover:bg-blue-700 transition px-4 py-2 text-sm"
-            >
-              Switch to {view === 'personal' ? 'Official' : 'Personal'} View
-            </button>
-
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-300 font-bold">OFFICIAL</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={view === 'personal'}
+                  onChange={toggleView}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:bg-green-600 transition duration-300"></div>
+                <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition peer-checked:translate-x-full"></div>
+              </label>
+              <span className="text-sm text-gray-300 font-bold">UNOFFICIAL</span>
+            </div>
           </div>
+
 
           <Hero view={view} />
           {view === 'personal' && (
@@ -115,7 +123,7 @@ const LifeOutsideCode = () => {
     { emoji: '🏋️‍♂️', title: 'Gym', desc: 'Physical fitness brings along mental fitness and toughness. I employ you to try it if you are not already. Slay your demons with a heavy deadlift.' },
     { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles, and the all important sacrifices — name it.' },
     { emoji: '🏊', title: 'Swimmer', desc: 'Gets the mind off the code that is working locally but not on production. Freestyle is my thing.' },
-    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, camping, and clutching for that Chicken Dinner.' }
+    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, a little bit camping, and clutching for that Chicken Dinner.' }
   ];
 
   return (
