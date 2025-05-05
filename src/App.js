@@ -123,7 +123,7 @@ const LifeOutsideCode = () => {
     { emoji: '🏋️‍♂️', title: 'Gym', desc: 'Physical fitness brings along mental fitness and toughness. I employ you to try it if you are not already. Slay your demons with a heavy deadlift.' },
     { emoji: '♟️', title: 'Chess Strategist', desc: 'I enjoy the calm chaos of the 64 squares. Tactics, endgames, puzzles, and the all important sacrifices — name it.' },
     { emoji: '🏊', title: 'Swimmer', desc: 'Gets the mind off the code that is working locally but not on production. Freestyle is my thing.' },
-    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, a little bit camping, and clutching for that Chicken Dinner.' }
+    { emoji: '🎮', title: 'PUBG Squad Leader', desc: 'Catch me on Livik. Mid-range fights, a little bit of camping, a dash of toxicity and a rush to kill bots all for the chicken dinner and a high K/D.' }
   ];
 
   return (
