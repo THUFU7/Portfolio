@@ -1,35 +1,25 @@
-// Enhanced App.js with toggle, Now Playing, alternate avatar, and animated hobbies
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import avatar from './assets/avatar-fun.jpg';
 import avatarFun from './assets/avatar.jpg';
-
 import { Phone, Mail, Github, Linkedin } from 'lucide-react';
 
 const App = () => {
-  const [view, setView] = useState('official'); // Default view is 'official'
+  const [view, setView] = useState('official');
 
   const toggleView = () => setView(view === 'personal' ? 'official' : 'personal');
 
   return (
-    <div className="relative min-h-screen bg-[#0f172a] text-white overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-10">
-        <svg className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="1" />
-              <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <circle cx="25%" cy="40%" r="300" fill="url(#bg-grad)" />
-          <circle cx="75%" cy="70%" r="250" fill="url(#bg-grad)" />
-        </svg>
-      </div>
-      <main className="font-sans text-white relative z-10">
+    <div
+      className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${
+        view === 'official' ? 'bg-white text-black' : 'bg-black text-white'
+      }`}
+    >
+      <main className="font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-10">
           <div className="flex justify-end py-4">
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-300 font-bold">OFFICIAL</span>
+              <span className="text-sm font-bold opacity-70">OFFICIAL</span>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -40,17 +30,12 @@ const App = () => {
                 <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:bg-green-600 transition duration-300"></div>
                 <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition peer-checked:translate-x-full"></div>
               </label>
-              <span className="text-sm text-gray-300 font-bold">UNOFFICIAL</span>
+              <span className="text-sm font-bold opacity-70">UNOFFICIAL</span>
             </div>
           </div>
 
-
           <Hero view={view} />
-          {view === 'personal' && (
-            <>
-              <LifeOutsideCode />
-            </>
-          )}
+          {view === 'personal' && <LifeOutsideCode />}
           {view === 'official' && (
             <>
               <About />
@@ -67,16 +52,17 @@ const App = () => {
   );
 };
 
-
-
 const Hero = ({ view }) => (
-  <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-[#0f172a] text-white relative">
-    {/* Giant circular border for creative look */}
+  <section
+    className={`min-h-screen flex flex-col justify-center items-center text-center p-10 relative transition-colors duration-500 ${
+      view === 'official' ? 'bg-white text-black' : 'bg-black text-white'
+    }`}
+  >
     <motion.div
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1 }}
-      className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-4 border-blue-500 shadow-xl overflow-hidden mb-8"
+      className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-4  shadow-xl overflow-hidden mb-8"
     >
       <img
         src={view === 'official' ? avatar : avatarFun}
@@ -108,13 +94,12 @@ const Hero = ({ view }) => (
         ? 'Systems Developer | Full-Stack Engineer | Tech Enthusiast'
         : 'Good things comes in threes: Lover of swimming, chess, and clutching Chicken Dinners 🏆 - well at least quarter the time.'}
     </p>
-
-    <p className="mt-2 text-sm text-gray-400 max-w-2xl">
+    <p className="mt-2 text-sm text-opacity-70 max-w-2xl">
       {view === 'official'
         ? 'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
         : 'When I’m not coding, I’m deep in a chess puzzle, a swimming lane, or a PUBG squad.'}
     </p>
-  </section >
+  </section>
 );
 
 
@@ -170,15 +155,15 @@ const About = () => {
 
   return (
     <section className="py-20 px-6 md:px-20">
-      <h2 className="text-4xl font-bold mb-6 text-center text-white">About Me</h2>
-      <p className="max-w-3xl mx-auto leading-relaxed text-lg text-gray-200 text-center">
+      <h2 className="text-4xl font-bold mb-6 text-center text-black">About Me</h2>
+      <p className="max-w-3xl mx-auto leading-relaxed text-lg text-black-200 text-center">
         I'm a Systems Developer from Nairobi, Kenya who thrives at the intersection of code, creativity, and real-world impact. From building regulatory engines for pension authorities to shipping full-stack apps that scale, I’ve honed my skills across PHP, React, Python, Yii2, Laravel, and more.
         <br /><br />
         Whether it’s optimizing backend systems with Redis or crafting sleek UIs in React, I take pride in building solutions that matter — especially in high-stakes industries like finance, energy, and compliance. Let's engineer the future, one system at a time.
         <br /><br />
-        <b>BRING ON THE PRESSURE!</b>
+        <b><u>BRING ON THE PRESSURE!</u></b>
       </p>
-      <h2 className="text-3xl font-semibold mt-10 mb-6 text-center text-white">Tech Stack</h2>
+      <h2 className="text-3xl font-semibold mt-10 text-center">Tech Stack</h2>
 
       <div className="mt-10 flex flex-wrap justify-center items-center gap-6">
         {techLogos.map((tech, index) => (
@@ -236,7 +221,7 @@ const Projects = () => {
   ];
 
   return (
-    <section className="py-20 px-6 md:px-20 text-white">
+    <section className="py-20 px-6 md:px-20 text-black">
       <h2 className="text-3xl font-semibold mb-10 text-center">Featured Projects</h2>
 
       <div className="grid gap-8 md:grid-cols-2">
@@ -266,7 +251,7 @@ const Projects = () => {
               {/* Content above blurred flag */}
               <div className="relative z-10">
                 <h3 className="text-xl font-bold">{project.title}</h3>
-                <p className="text-gray-800 text-sm text-white">{project.description}</p>
+                <p className="text-gray-800 text-sm text-black">{project.description}</p>
 
                 {/* Hover Reveal Tech */}
                 <div className="opacity-0 group-hover:opacity-100 transition duration-300 space-x-2 mt-3">
@@ -349,7 +334,7 @@ const Experience = () => {
 
   return (
     <section className="py-20 px-6 md:px-20 ">
-      <h2 className="text-3xl font-semibold mb-10 text-center text-white">Professional Experience</h2>
+      <h2 className="text-3xl font-semibold mb-10 text-center text-black">Professional Experience</h2>
       <div className="relative border-l-2 border-gray-200 space-y-8 pl-6">
         {experiences.map((exp, index) => (
           <div key={index} className="relative shadow rounded-xl p-6 border">
@@ -359,7 +344,7 @@ const Experience = () => {
             <h3 className="text-xl font-bold text-purple-700">{exp.role}</h3>
             <p className="text-sm text-white">{exp.date} • {exp.company}, {exp.location}</p>
 
-            <div className="mt-4 space-y-2 text-white text-sm">
+            <div className="mt-4 space-y-2 text-black text-sm">
               {exp.highlights.map((point, i) => (
                 <p key={i}>• {point}</p>
               ))}
@@ -370,7 +355,7 @@ const Experience = () => {
         <a
           href="/Robert_Mungai_Resume.pdf"
           download
-          className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
+          className="mt-6 inline-block bg-blue-600 text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
         >
           📄 Download Resume
         </a>
@@ -383,8 +368,8 @@ const Experience = () => {
 
 const Education = () => (
   <section className="py-20 px-6 md:px-20 text-white">
-    <h2 className="text-3xl font-bold mb-6 text-white text-center">Education</h2>
-    <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-1 text-left text-white">
+    <h2 className="text-3xl font-bold mb-6 text-black text-center">Education</h2>
+    <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-1 text-left text-black">
       <h3 className="text-xl font-semibold">B.Sc. in Information Technology</h3>
       <p className="text-sm mt-1">Multimedia University of Kenya</p>
       <p className="text-xs  mt-1">2018 - 2022</p>
@@ -416,7 +401,7 @@ const Certifications = () => {
   ];
 
   return (
-    <section className="py-20 px-6 md:px-20 text-white">
+    <section className="py-20 px-6 md:px-20 text-black">
       <h2 className="text-3xl font-semibold mb-10 text-center">Certifications</h2>
 
       <div className="grid gap-8 md:grid-cols-2">
@@ -440,11 +425,7 @@ const Certifications = () => {
 
             {/* Center: Text with background hover effect */}
             <div className="relative flex-1 p-6 space-y-3 overflow-hidden">
-              <img
-                src={cert.bg}
-                alt="Background"
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 blur-sm transition duration-300"
-              />
+              
 
               <div className="relative z-10">
                 <h3 className="text-xl font-bold">{cert.name}</h3>
@@ -471,7 +452,7 @@ const Certifications = () => {
 
 const Contact = () => (
   <section className="py-20 px-6 md:px-20 relative z-10"> {/* Add relative and z-10 here */}
-    <h2 className="text-3xl font-semibold mb-10 text-center text-white">Let's build</h2>
+    <h2 className="text-3xl font-semibold mb-10 text-center text-black">Let's build</h2>
 
     <div className="flex justify-center gap-6">
       {/* Phone */}
@@ -480,7 +461,7 @@ const Contact = () => (
         className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="Call Robert"
       >
-        <Phone size={28} className="text-white" />
+        <Phone size={28} className="text-black" />
       </a>
 
       {/* Email */}
@@ -489,7 +470,7 @@ const Contact = () => (
         className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="Email Robert"
       >
-        <Mail size={28} className="text-white" />
+        <Mail size={28} className="text-black" />
       </a>
 
       {/* GitHub */}
@@ -500,7 +481,7 @@ const Contact = () => (
         className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="GitHub"
       >
-        <Github size={28} className="text-white" />
+        <Github size={28} className="text-black" />
       </a>
 
       {/* LinkedIn */}
@@ -511,11 +492,11 @@ const Contact = () => (
         className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
         title="LinkedIn"
       >
-        <Linkedin size={28} className="text-white" />
+        <Linkedin size={28} className="text-black" />
       </a>
     </div>
 
-    <p className="text-sm mt-8 text-center text-white">
+    <p className="text-sm mt-8 text-center text-black">
       Available for freelance, remote, and full-time roles.
     </p>
   </section>
