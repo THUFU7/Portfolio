@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import avatar from './assets/avatar.jpg';
 import avatarFun from './assets/avatar-fun.jpg';
 import { Phone, Mail, Github, Linkedin, ShieldCheck, Briefcase } from 'lucide-react';
+import Lottie from 'lottie-react';
+import devAnimation from './assets/Coding.json';
+import funAnimation from './assets/Vacation.json';
 
 const App = () => {
   const [view, setView] = useState('official');
@@ -18,14 +21,21 @@ const App = () => {
           <div className="flex justify-between items-center py-4">
             {/* Avatar + Name */}
             <div className="flex items-center gap-3">
-              <img
-                src={view === 'official' ? avatarFun : avatar}
+              <Lottie
+                animationData={view === 'official' ? devAnimation : funAnimation}
+                loop
+                autoplay
+                className="w-32 h-32 md:w-25 md:h-25 mb-3"
+              />
+              {/* <img
+                src={view === 'official' ? devAnimation : avatar}
                 alt="Robert Mungai"
                 className="w-10 h-10 rounded-full object-cover"
-              />
+              /> */}
               <span className="text-lg font-bold uppercase opacity-70">
-                NO PRESSURE, NO DIAMONDS
-              </span>
+  {view === 'official' ? 'NO PRESSURE, NO DIAMONDS' : 'YES PRESSURE, YES DIAMONDS'}
+</span>
+
             </div>
 
             {/* Toggle */}
