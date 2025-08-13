@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import avatar from './assets/avatar-fun.jpg';
-import avatarFun from './assets/avatar.jpg';
-import { Phone, Mail, Github, Linkedin } from 'lucide-react';
+import avatar from './assets/avatar.jpg';
+import avatarFun from './assets/avatar-fun.jpg';
+import { Phone, Mail, Github, Linkedin, ShieldCheck, Briefcase } from 'lucide-react';
 
 const App = () => {
   const [view, setView] = useState('official');
@@ -11,13 +11,24 @@ const App = () => {
 
   return (
     <div
-      className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${
-        view === 'official' ? 'bg-white text-black' : 'bg-black text-white'
-      }`}
+      className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${view === 'official' ? 'bg-white text-black' : 'bg-black text-white'}`}
     >
       <main className="font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-10">
-          <div className="flex justify-end py-4">
+          <div className="flex justify-between items-center py-4">
+            {/* Avatar + Name */}
+            <div className="flex items-center gap-3">
+              <img
+                src={view === 'official' ? avatarFun : avatar}
+                alt="Robert Mungai"
+                className="w-10 h-10 rounded-full object-cover"
+              />
+              <span className="text-lg font-bold uppercase opacity-70">
+                NO PRESSURE, NO DIAMONDS
+              </span>
+            </div>
+
+            {/* Toggle */}
             <div className="flex items-center gap-2">
               <span className="text-sm font-bold opacity-70">OFFICIAL</span>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -41,66 +52,42 @@ const App = () => {
               <About />
               <Projects />
               <Experience />
-              <Education />
-              <Certifications />
+              <EducationCertifications />
             </>
           )}
-          <Contact />
         </div>
       </main>
+      <Contact view={view} />
     </div>
   );
 };
 
 const Hero = ({ view }) => (
   <section
-    className={`min-h-screen flex flex-col justify-center items-center text-center p-10 relative transition-colors duration-500 ${
-      view === 'official' ? 'bg-white text-black' : 'bg-black text-white'
-    }`}
+    className={`min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-20 relative transition-colors duration-500 ${view === 'official' ? 'bg-white text-black' : 'bg-black text-white'}`}
+    style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/triangles.png')", backgroundRepeat: 'repeat' }}
   >
-    <motion.div
-      initial={{ opacity: 0, scale: 0.6 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <motion.h1
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-4  shadow-xl overflow-hidden mb-8"
+      className="text-4xl md:text-6xl font-bold mb-6"
     >
-      <img
-        src={view === 'official' ? avatar : avatarFun}
-        alt="Robert Mungai"
-        className="w-full h-full object-cover"
-      />
-    </motion.div>
-    {view === 'official' ? (
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-4xl md:text-6xl font-bold"
-      >
-        SALUT! I am Robert Mungai.
-      </motion.h1>
-    ) : (
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-4xl md:text-4xl font-bold"
-      >
-        SALUT! I am...well you already know who I am <span className="inline-block">😄</span>
-      </motion.h1>
-    )}
-    <p className="mt-4 text-lg md:text-xl max-w-2xl">
+      {view === 'official' ? "SALUT! I am Robert Mungai." : 'SALUT! I am...well you already know who I am 😄'}
+    </motion.h1>
+
+    <p className="text-lg md:text-xl max-w-2xl">
       {view === 'official'
-        ? 'Systems Developer | Full-Stack Engineer | Tech Enthusiast'
+        ? 'Systems Developer | MS Dynamics 365 Business Central | Tech Enthusiast'
         : 'Good things comes in threes: Lover of swimming, chess, and clutching Chicken Dinners 🏆 - well at least quarter the time.'}
     </p>
-    <p className="mt-2 text-sm text-opacity-70 max-w-2xl">
-      {view === 'official'
-        ? 'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
-        : 'When I’m not coding, I’m deep in a chess puzzle, a swimming lane, or a PUBG squad.'}
-    </p>
+
+    {/* {view === 'official' && (
+      'Crafting scalable, secure, and smart systems — from API magic to full-stack engineering.'
+    )} */}
   </section>
 );
+
 
 
 const LifeOutsideCode = () => {
@@ -302,9 +289,11 @@ const Experience = () => {
       date: "Oct 2023 – Present",
       status: "Active",
       highlights: [
-        "Led development of Risk-Based Supervision System for Ghana’s Pensions Industry.",
-        "Built a regulatory risk toolkit using Yii2, SQL Server, Redis queues (40 workers).",
-        "Integrated Python's FASTAPIs to cut risk analysis time to only 2 hours."
+        "Spearheaded the development of a Risk-Based Supervision System transforming regulatory compliance in Ghana's pensions sector.",
+        "Engineered a risk toolkit calculating risk ratings via financial returns and surveys for better decision-making.",
+        "Built robust web applications using Yii2 & SQL Server, boosting operational efficiency significantly.",
+        "Integrated with government pensions systems, reducing manual return analysis by over 80%.",
+        "Implemented APIs (REST, SOAP) to streamline cross-platform data exchange."
       ]
     },
     {
@@ -315,7 +304,7 @@ const Experience = () => {
       status: "Completed",
       highlights: [
         "Contributed to RIMS for Uganda Electricity Authority (Investment, Outage modules).",
-        "Developed e-commerce Auctioning Mobile App with modern UI.",
+        "Developed e-commerce Auctioning Mobile App with sleek UI.",
         "Participated in code reviews, bug tracking, and documentation."
       ]
     },
@@ -326,60 +315,56 @@ const Experience = () => {
       date: "Feb 2021 – Apr 2021",
       status: "Completed",
       highlights: [
-        "Developed E-Results Android app with real-time REST API sync.",
-        "Improved UX and integrated Android Studio print features."
+        "Built E-Results Android app with real-time REST API sync.",
+        "Improved UX & integrated print features via Android Studio."
       ]
     }
   ];
 
   return (
-    <section className="py-20 px-6 md:px-20 ">
-      <h2 className="text-3xl font-semibold mb-10 text-center text-black">Professional Experience</h2>
-      <div className="relative border-l-2 border-gray-200 space-y-8 pl-6">
+    <section className="py-20 px-6 md:px-20 text-black">
+      <h2 className="text-3xl font-bold mb-6 text-black text-center">Experience</h2>
+
+      <div className="space-y-12">
         {experiences.map((exp, index) => (
-          <div key={index} className="relative shadow rounded-xl p-6 border">
-            {/* Timeline Circle */}
-
-
-            <h3 className="text-xl font-bold text-purple-700">{exp.role}</h3>
-            <p className="text-sm text-white">{exp.date} • {exp.company}, {exp.location}</p>
-
-            <div className="mt-4 space-y-2 text-black text-sm">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2 }}
+            className="bg-white border-l-4 border-purple-600 shadow-lg p-6 rounded-lg relative overflow-hidden group hover:shadow-xl transition duration-300"
+          >
+            <span className="absolute top-0 right-0 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-bl-lg">
+              {exp.status}
+            </span>
+            <h3 className="text-xl font-bold text-purple-700 mb-1">{exp.role}</h3>
+            <p className="text-sm text-gray-600">{exp.company} • {exp.location}</p>
+            <p className="text-xs text-gray-400 mb-3">{exp.date}</p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
               {exp.highlights.map((point, i) => (
-                <p key={i}>• {point}</p>
+                <li key={i}>{point}</li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </motion.div>
         ))}
-        {/* Resume Download Button */}
+      </div>
+
+      <div className="mt-12 text-center">
         <a
           href="/Robert_Mungai_Resume.pdf"
           download
-          className="mt-6 inline-block bg-blue-600 text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-700 transition duration-300"
+          className="inline-block bg-purple-700 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-purple-800 transition duration-300"
         >
           📄 Download Resume
         </a>
       </div>
-
     </section>
   );
 };
 
 
-const Education = () => (
-  <section className="py-20 px-6 md:px-20 text-white">
-    <h2 className="text-3xl font-bold mb-6 text-black text-center">Education</h2>
-    <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-1 text-left text-black">
-      <h3 className="text-xl font-semibold">B.Sc. in Information Technology</h3>
-      <p className="text-sm mt-1">Multimedia University of Kenya</p>
-      <p className="text-xs  mt-1">2018 - 2022</p>
-    </div>
-  </section>
-);
-
-
-
-const Certifications = () => {
+const EducationCertifications = () => {
   const microsoftLogo = require('./assets/ms.png');
   const udemyLogo = require('./assets/udemy.png');
 
@@ -387,24 +372,39 @@ const Certifications = () => {
     {
       name: 'Microsoft 365 Certified: Fundamentals',
       date: 'Issued Mar 2025',
-      border: 'border-green-500',
       file: '/ms-certificate.pdf',
       logo: microsoftLogo,
+      badgeUrl: 'https://www.credly.com/badges/microsoft-fundamentals',
+      verified: true
     },
     {
       name: 'PHP Yii2 Course — Udemy',
       date: 'Completed Dec 2023',
-      border: 'border-yellow-500',
       file: '/udemy-cert.pdf',
       logo: udemyLogo,
+      badgeUrl: 'https://udemy.com/certificate/php-yii2-course',
+      verified: false
     }
   ];
 
   return (
     <section className="py-20 px-6 md:px-20 text-black">
-      <h2 className="text-3xl font-semibold mb-10 text-center">Certifications</h2>
+      <h2 className="text-4xl font-bold mb-6 text-center text-black">Education & Certifications</h2>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="max-w-4xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-xl font-semibold">B.Sc. in Information Technology</h3>
+          <p className="text-sm mt-1">Multimedia University of Kenya</p>
+          <p className="text-xs mt-1 text-gray-500">2018 - 2022</p>
+        </motion.div>
+      </div>
+
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-2">
         {certs.map((cert, index) => (
           <motion.a
             key={index}
@@ -412,27 +412,33 @@ const Certifications = () => {
             download
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex rounded-xl shadow-md border overflow-hidden group hover:shadow-lg transition-all duration-300 ${cert.border}`}
-            initial={{ opacity: 0, y: 30 }}
+            className="group block rounded-xl border border-gray-200 overflow-hidden shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 hover:scale-[1.01] bg-gradient-to-br from-white via-gray-50 to-white"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
+            viewport={{ once: true }}
           >
-            {/* Left: Logo */}
-            <div className="flex items-center justify-center p-6 w-1/3 bg-white/10">
-              <img src={cert.logo} alt="Cert Logo" className="h-20 object-contain" />
-            </div>
-
-            {/* Center: Text with background hover effect */}
-            <div className="relative flex-1 p-6 space-y-3 overflow-hidden">
-              
-
-              <div className="relative z-10">
-                <h3 className="text-xl font-bold">{cert.name}</h3>
-                <p className="text-sm text-gray-300">{cert.date}</p>
-                <p className="text-xs text-white-400 mt-2 opacity-0 group-hover:opacity-100 transition">
-                  ⬇ Click to download certificate
+            <div className="flex items-center gap-4 p-6">
+              <img src={cert.logo} alt={cert.name} className="w-16 h-16 object-contain" />
+              <div>
+                <h3 className="text-lg font-bold text-purple-700 group-hover:underline flex items-center gap-1">
+                  {cert.name}
+                  {cert.verified && <ShieldCheck size={16} className="text-green-600" title="Verified" />}
+                </h3>
+                <p className="text-sm text-gray-600">{cert.date}</p>
+                <p className="text-xs mt-1 text-gray-400 opacity-0 group-hover:opacity-100 transition">
+                  ⬇ Download certificate
                 </p>
+                {cert.badgeUrl && (
+                  <a
+                    href={cert.badgeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs mt-1 inline-block text-blue-600 hover:underline"
+                  >
+                    View Badge →
+                  </a>
+                )}
               </div>
             </div>
           </motion.a>
@@ -442,65 +448,31 @@ const Certifications = () => {
   );
 };
 
-
-
-
-
-
-
-
-
-const Contact = () => (
-  <section className="py-20 px-6 md:px-20 relative z-10"> {/* Add relative and z-10 here */}
-    <h2 className="text-3xl font-semibold mb-10 text-center text-black">Let's build</h2>
+const Contact = ({ view }) => (
+  <section className={`w-full py-20 px-6 md:px-20 relative z-10 ${view === 'official' ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <h2 className="text-3xl font-semibold mb-10 text-center">Let's build</h2>
 
     <div className="flex justify-center gap-6">
-      {/* Phone */}
-      <a
-        href="tel:+254799178783"
-        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
-        title="Call Robert"
-      >
-        <Phone size={28} className="text-black" />
+      <a href="tel:+254799178783" className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition" title="Call Robert">
+        <Phone size={28} />
       </a>
-
-      {/* Email */}
-      <a
-        href="mailto:robertomungai001@gmail.com"
-        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
-        title="Email Robert"
-      >
-        <Mail size={28} className="text-black" />
+      <a href="mailto:robertomungai001@gmail.com" className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition" title="Email Robert">
+        <Mail size={28} />
       </a>
-
-      {/* GitHub */}
-      <a
-        href="https://github.com/thufu7"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
-        title="GitHub"
-      >
-        <Github size={28} className="text-black" />
+      <a href="https://github.com/thufu7" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition" title="GitHub">
+        <Github size={28} />
       </a>
-
-      {/* LinkedIn */}
-      <a
-        href="https://linkedin.com/in/robert-mungai-529306219/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
-        title="LinkedIn"
-      >
-        <Linkedin size={28} className="text-black" />
+      <a href="https://linkedin.com/in/robert-mungai-529306219/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition" title="LinkedIn">
+        <Linkedin size={28} />
       </a>
     </div>
 
-    <p className="text-sm mt-8 text-center text-black">
+    <p className="text-sm mt-8 text-center">
       Available for freelance, remote, and full-time roles.
     </p>
   </section>
 );
+
 
 
 
